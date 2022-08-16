@@ -1,0 +1,23 @@
+
+*{
+  border:0;
+  margin:0;
+  padding:0;
+  max-height:100vh;
+  max-width:100vw;
+}
+
+html{
+  font-size:62.5%;
+  max-height:100%;
+  max-width:100%;
+  overflow:none;
+} 
+
+body{
+  max-height:100%;
+  max-width:100%; 
+  font-size: 1.6rem;
+  overflow:none;
+}
+
