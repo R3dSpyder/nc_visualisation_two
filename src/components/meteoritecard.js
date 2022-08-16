@@ -10,12 +10,12 @@ const Meteoritecard = ({
   reclong,
 }) => {
   const yearConvert = new Date(year).getFullYear();
-
+  const toString = yearConvert.toString()
   return (
     <span className="Meteorite_info_section">
       <ol>
         <li>{name}</li>
-        <li>{yearConvert}</li>
+        <li>{year}</li>
         <li>{mass}</li>
         <li>{recclass}</li>
         <li>{fall}</li>

@@ -1,5 +1,5 @@
-const Fetch_data = () => {
-  return fetch("https://data.nasa.gov/resource/gh4g-9sfh.json").then((data) => {
+const Fetch_data = (query) => {
+  return fetch(`https://data.nasa.gov/resource/gh4g-9sfh.json${query}`).then((data) => {
     return data.json();
   });
 };

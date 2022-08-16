@@ -13,13 +13,13 @@ import MapChart from "./components/worldMap";
 
 function App() {
   const [meteorites, setMeteorites] = useState([]);
-  const [filteredMeteorites, setFilteredMeteorites] = useState([]);
+  const [query, setQuery] = useState("")
 
   useEffect(() => {
-    Fetch_data().then((data) => {
+    Fetch_data(query).then((data) => {
       setMeteorites(data);
     });
-  }, []);
+  }, [meteorites]);
   return (
     <>
       <section className="container">
@@ -34,17 +34,16 @@ function App() {
         <section id="filter_plane">
           <Filter_bar
             className="Filter_bar"
-            setFilteredMeteorites={setFilteredMeteorites}
-            meteorites={meteorites}
+            setQuery={setQuery}
           />
           <Sort_bar className="Sort_bar" />
         </section>
         <section id="main_map_plane">
-          {/* <Meteorite_info
+          <Meteorite_info
             className="Meteorite_info_section"
             meteorites={meteorites}
-          /> */}
-          <MapChart className="map" />
+          />
+         {/* <MapChart className="map" /> */}
         </section>
         <section id="footer_plane">
           <Links className="Links" />

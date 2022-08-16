@@ -2,17 +2,21 @@ import React from "react";
 
 import { useState } from "react";
 
-const Filter_bar = ({ setFilteredMeteorites, meteorites }) => {
+const Filter_bar = ({ setQuery }) => {
   const [filter, setFilter] = useState({});
+  const [checked, setChecked] = useState(false)
+
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    const filtered = meteorites.filter((meteorite) => {
-      const filtered = filter.name;
-      return meteorite[filtered] === filter.value;
-    });
-    console.log(filtered);
-    setFilteredMeteorites(filtered);
+    setQuery("")
+    let query = ""
+    if(filter.name === 'year'){
+      query = `?${filter.name}=${filter.value}-01-01T00:00:00.000`
+    } else {
+    query = `?${filter.name}=${filter.value}`
+    }
+    console.log(query)
+    setQuery(query)
     setFilter({});
   };
 
@@ -25,10 +29,8 @@ const Filter_bar = ({ setFilteredMeteorites, meteorites }) => {
           id="name"
           type="text"
           name="name"
-          value={filter.value}
           onChange={(event) => {
-            console.log(event.target.name, event.target.value);
-            setFilter({ name: event.target.name, value: event.target.value });
+            setFilter({ name: event.target.name, value: event.target.value })
           }}
         ></input>
       </div>
@@ -39,9 +41,8 @@ const Filter_bar = ({ setFilteredMeteorites, meteorites }) => {
           type="text"
           id="year"
           name="year"
-          value={filter}
           onChange={(event) => {
-            setFilter(event.target.value);
+            setFilter({ name: event.target.name, value: event.target.value });
           }}
         ></input>
       </div>
@@ -52,24 +53,29 @@ const Filter_bar = ({ setFilteredMeteorites, meteorites }) => {
           id="mass"
           type="text"
           name="mass"
-          value={filter}
           onChange={(event) => {
-            setFilter(event.target.value);
+            setFilter({ name: event.target.name, value: event.target.value });
           }}
         ></input>
       </div>
       <button id="fellButton">Fell</button>
       <div id="dropDownFell" className="dropDownMenu">
         <label htmlFor="fell">Fell:</label>
-        <input id="fell" type="radio" name="fell"></input>
+        <input id="fell" type="text" name="fall" placeholder="Fell/Found" onChange={(event) => {
+            setFilter({ name: event.target.name, value: event.target.value });
+          }}></input>
       </div>
       <button id="classButton">Class</button>
       <div id="dropDownClass" className="dropDownMenu">
         <label htmlFor="class">Class:</label>
-        <select id="class" type="checkbox" name="class">
-          <option value="a">Test1</option>
-          <option value="b">Test2</option>
-          <option value="c">Test3</option>
+        <select id="class" type="checkbox" name="recclass"  onChange={(event) => {
+            setFilter({ name: event.target.name, value: event.target.value });
+          }}>
+          <option value="LL5">Test1</option>
+          <option value="H6">Test2</option>
+          <option value="L6" onClick={(event) => {
+            setFilter({ name: event.target.name, value: event.target.value });
+          }}>Test3</option>
         </select>
       </div>
       <button id="latitudeButton">Latitude</button>
@@ -78,10 +84,9 @@ const Filter_bar = ({ setFilteredMeteorites, meteorites }) => {
         <input
           id="latitude"
           type="text"
-          name="latitude"
-          value={filter}
+          name="reclat"
           onChange={(event) => {
-            setFilter(event.target.value);
+            setFilter({ name: event.target.name, value: event.target.value });
           }}
         ></input>
       </div>
@@ -91,10 +96,9 @@ const Filter_bar = ({ setFilteredMeteorites, meteorites }) => {
         <input
           id="longitude"
           type="text"
-          name="longitude"
-          value={filter}
+          name="reclong"
           onChange={(event) => {
-            setFilter(event.target.value);
+            setFilter({ name: event.target.name, value: event.target.value });
           }}
         ></input>
       </div>
